@@ -33,11 +33,13 @@ steps:
   - task: ado-testingextension@2
     condition: always()
     inputs:
-      Operation: 'createTests'
+      Operation: 'updateTestResults'
       DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
       AzureProjectName: 'SampleDemo'
       PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
-      RepoName: ''
-      FeatureFilePath: 'SpecFlowCalculator.Specs'
-      AreTheseDotnetTests: 'true'
+      xmlResultFolder: 'SpecFlowCalculator.Specs'
+      xmlNamingFormat: 'test-result'
+      testPlan: '41'
+      testSuite: '44'
+      testConfiguration: '2'
