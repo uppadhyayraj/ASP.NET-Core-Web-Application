@@ -255,3 +255,4 @@ paket-files/
 
 # CodeRush
 .cr/
+SpecFlowCalculator.Specs/test-result.xml

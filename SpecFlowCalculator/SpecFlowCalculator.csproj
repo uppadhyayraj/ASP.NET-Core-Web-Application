@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.10" />
+		<PackageReference Include="JunitXml.TestLogger" Version="3.0.110" />
 	</ItemGroup>
 
 </Project>
