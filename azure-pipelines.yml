@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 steps:
   - checkout: self
     clean: true
@@ -23,5 +23,6 @@ steps:
       AzureProjectName: 'SampleDemo'
       PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
+      RepoName: 'test'
       FeatureFilePath: 'SpecFlowCalculator.Specs'
       AreTheseDotnetTests: 'true'
