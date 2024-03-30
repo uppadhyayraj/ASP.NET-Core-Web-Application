@@ -3,11 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
-
 pool:
-  vmImage: windows-latest
+  name: AutoTest
 steps:
   - checkout: self
     clean: true
@@ -17,12 +14,29 @@ steps:
       packageType: 'sdk'
       version: '8.x'
   - task: ado-testingextension@2
+    displayName: "Create Test Cases"
     inputs:
       Operation: 'createTests'
       DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
       AzureProjectName: 'SampleDemo'
       PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
-      RepoName: 'test'
+      RepoName: ''
+      FeatureFilePath: 'SpecFlowCalculator.Specs'
+      AreTheseDotnetTests: 'true'    
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'test'
+      projects: '**/*.csproj'
+      arguments: '--logger:"junit;LogFilePath=test-result.xml"'
+      workingDirectory: 'SpecFlowCalculator.Specs'
+  - task: ado-testingextension@2
+    inputs:
+      Operation: 'createTests'
+      DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
+      AzureProjectName: 'SampleDemo'
+      PAT: '$(System.AccessToken)'
+      DotnetExePath: 'dotnet'
+      RepoName: ''
       FeatureFilePath: 'SpecFlowCalculator.Specs'
       AreTheseDotnetTests: 'true'
