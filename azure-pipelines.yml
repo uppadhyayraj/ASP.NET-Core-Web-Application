@@ -20,7 +20,7 @@ steps:
       AzureProjectName: 'SampleDemo'
       PAT: '$(SYSTEM_ACCESSTOKEN)'
       DotnetExePath: 'dotnet'
-      FeatureFilePath: 'ASP.NET-Core-Web-Application/SpecFlowCalculator.Specs'
+      FeatureFilePath: 'SpecFlowCalculator.Specs'
       AreTheseDotnetTests: 'true'
     env:
       SYSTEM_ACCESSTOKEN: $(system.accesstoken)  
