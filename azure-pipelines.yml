@@ -9,6 +9,9 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 steps:
+  - checkout: self
+    clean: true
+    persistCredentials: true
   - task: UseDotNet@2
     inputs:
       packageType: 'sdk'
@@ -18,9 +21,7 @@ steps:
       Operation: 'createTests'
       DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
       AzureProjectName: 'SampleDemo'
-      PAT: '$(SYSTEM_ACCESSTOKEN)'
+      PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
       FeatureFilePath: 'SpecFlowCalculator.Specs'
       AreTheseDotnetTests: 'true'
-    env:
-      SYSTEM_ACCESSTOKEN: $(system.accesstoken)  
