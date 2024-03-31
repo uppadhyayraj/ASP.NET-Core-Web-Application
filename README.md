@@ -12,6 +12,8 @@ This is sample/demo project to showcase following features of the [Azure DevOps 
 
 A test project using the NUnit framework containing 5 simple example tests in [Calculator.feature](./SpecFlowCalculator.Specs/Features/Calculator.feature) and step definitions defined in [CalculatorStepDefinitions.cs](./SpecFlowCalculator.Specs/Steps/CalculatorStepDefinitions.cs)
 
+## Pre-Requisites
+- Having access in Azure DevOps either Test Plan or MSDN subscription for creating and mamaging test plans
 ## Notes
 
 ### Version
