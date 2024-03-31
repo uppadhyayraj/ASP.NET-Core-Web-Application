@@ -30,7 +30,8 @@ steps:
       projects: '**/*.csproj'
       arguments: '--logger:"junit;LogFilePath=test-result.xml"'
       workingDirectory: 'SpecFlowCalculator.Specs'
-  - task: ado-testingextension@2
+  - task: 'ado-testingextension@2'
+    displayName: 'Update Test Results to Test Plan'
     condition: always()
     inputs:
       Operation: 'updateTestResults'
@@ -42,6 +43,6 @@ steps:
       xmlNamingFormat: 'test-result'
       testPlan: '41'
       testSuite: '44'
-      testConfiguration: '2'
+      testConfiguration: '1'
       AreTheseDotnetTests: 'true'
   
