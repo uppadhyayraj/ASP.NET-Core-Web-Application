@@ -43,6 +43,6 @@ steps:
       xmlNamingFormat: 'test-result'
       testPlan: '41'
       testSuite: '44'
-      testConfiguration: '1'
+      testConfiguration: '6'
       AreTheseDotnetTests: 'true'
   
