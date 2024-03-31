@@ -23,13 +23,15 @@ steps:
       DotnetExePath: 'dotnet'
       RepoName: ''
       FeatureFilePath: 'SpecFlowCalculator.Specs'
-      AreTheseDotnetTests: 'true'    
-  - task: DotNetCoreCLI@2
+      AreTheseDotnetTests: 'true' 
+  - task: CmdLine@2
     inputs:
-      command: 'test'
-      projects: '**/*.csproj'
-      arguments: '--logger:"junit;LogFilePath=test-result.xml"'
+      script: 'dotnet test --logger:"junit;LogFilePath=test-result.xml"'
       workingDirectory: 'SpecFlowCalculator.Specs'
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/TEST-*.xml'
   - task: 'ado-testingextension@2'
     displayName: 'Update Test Results to Test Plan'
     condition: always()
