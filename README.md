@@ -1,14 +1,12 @@
 # Testing an ASP.NET Core web application using .NET 6
 
-This project contains a working example of how to test an ASP.NET Core web application using SpecFlow and .NET 6.
+This project is taken from specflow's repo to demostrate functionality of [Azure DevOps Testing Extension](https://marketplace.visualstudio.com/items?itemName=RajUppadhyay.ado-testingextension)
 
-The UI interactions are performed using [SpecFlow.Actions.Selenium](https://github.com/SpecFlowOSS/SpecFlow.Actions/tree/main/Plugins/SpecFlow.Actions.Selenium).
 
 ## Projects
-
-### SpecFlowCalculator
-
-A simple calculator page using an ASP.NET Core web application. The calculator has basic functionality - Add, subtract, multiply, and divide. This application is the subject under test.
+This is sample/demo project to showcase following features of the [Azure DevOps Testing Extension](https://marketplace.visualstudio.com/items?itemName=RajUppadhyay.ado-testingextension):
+- Create Tests from Feature Files to Azure DevOps, and if it is Dotnet Project then it automatically add the associated automation in DevOps. 
+- Updating the test results to Associated Test Plan/Suites in Azure DevOps (Including Microsoft and Non-Microsoft testing frameworks)
 
 ### SpecFlowCalculator.Specs
 
@@ -18,30 +16,16 @@ A test project using the NUnit framework containing 5 simple example tests in [C
 
 ### Version
 
-This project was built using .NET6 SDK version ```6.0.100-preview.7.21379.14```
+This project was built using .NET8 SDK version ```8.0.1```
 
-### Launching the web application from the test project
+## Getting Started
 
-The test project creates the web host (default port https://localhost:5001/) during execution ```CreateHostBuilder``` [Kestrel](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-6.0) (default webserver for ASP.NET Core), and stops the host once the tests have completed.
-
-```csharp
-[Binding]
-public sealed class EnvironmentSetupHooks
-{
-    private static IHost _host;
-
-    [BeforeTestRun]
-    public static void BeforeTestRun()
-    {
-        _host = Program.CreateHostBuilder(null).UseContentRoot(Path.Combine(Environment.CurrentDirectory, "../../../../SpecFlowCalculator")).Build();
-
-        _host.Start();
-    }
-
-    [AfterTestRun]
-    public static void AfterTestRun()
-    {
-        _host.StopAsync().Wait();
-    }
-}
-```
+- Clone this repo into your local machine using your favorite IDE e.g. VS Code
+- Check this code into your Azure Repo or Github repo
+- Navigate to your Azure DevOps instance and [Craete a Test Plan](https://learn.microsoft.com/en-us/azure/devops/test/create-a-test-plan?view=azure-devops#create-a-test-plan) and note the ID of this
+- Following the above link, also create a query based test suite with Tags Contains "myTag" and note the Id of this
+- Also [Create a new Configuration](https://learn.microsoft.com/en-us/azure/devops/test/test-different-configurations?view=azure-devops&tabs=browser) and associate it with test suites created above. Please note the configuration ID for updating in YML in next steps
+- Open the file [azure-pipelines.yml](./azure-pipelines.yml), as as commented in the YML file update the values/placeholder.
+- [Create a pipeline](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/test-studio-yaml-pipeline#create-a-pipeline) using above YML file and run it
+- You will notice, test will populate automatically in above create test plan/test suites and also results being updated as well.
+ß

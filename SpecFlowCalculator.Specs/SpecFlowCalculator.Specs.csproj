@@ -44,8 +44,5 @@
 		<Folder Include="Drivers\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\SpecFlowCalculator\SpecFlowCalculator.csproj" />
-	</ItemGroup>
 
 </Project>

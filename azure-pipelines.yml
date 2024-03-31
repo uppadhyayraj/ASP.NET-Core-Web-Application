@@ -4,7 +4,7 @@
 # https://aka.ms/yaml
 
 pool:
-  name: AutoTest
+  vmImage: 'ubuntu-latest'
 steps:
   - checkout: self
     clean: true
@@ -13,39 +13,52 @@ steps:
     inputs:
       packageType: 'sdk'
       version: '8.x'
+  # Following Task Azure Testing will read the feature files in the project and create tests in Azure DevOps
   - task: ado-testingextension@2
     displayName: "Create Test Cases"
     inputs:
       Operation: 'createTests'
-      DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
-      AzureProjectName: 'SampleDemo'
+      # Here update <<YOUR-ORG>> with your organization name in Azure DevOps
+      DevOpsUrl: 'https://dev.azure.com/<<YOUR-ORG>>'
+      # Here update <<YOUR-PROJECT>> with your project name in Azure DevOps
+      AzureProjectName: '<<YOUR-PROJECT>>'
       PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
       RepoName: ''
       FeatureFilePath: 'SpecFlowCalculator.Specs'
       AreTheseDotnetTests: 'true' 
+  
+  # Following task is running Dotnet tests and Generating XML file as this linux agent and VSTest Task will not work
   - task: CmdLine@2
     inputs:
       script: 'dotnet test --logger:"junit;LogFilePath=test-result.xml"'
       workingDirectory: 'SpecFlowCalculator.Specs'
+  # Following task will publish results and associate it with pipeline
   - task: PublishTestResults@2
     condition: always()
     inputs:
       testResultsFormat: 'JUnit'
       testResultsFiles: '**/TEST-*.xml'
+  
+  # This task will capture the results from above step and publish to given test plan/suite and associated configurations
   - task: 'ado-testingextension@2'
     displayName: 'Update Test Results to Test Plan'
     condition: always()
     inputs:
       Operation: 'updateTestResults'
-      DevOpsUrl: 'https://dev.azure.com/rgcorp-projects'
-      AzureProjectName: 'SampleDemo'
+      # Here update <<YOUR-ORG>> with your organization name in Azure DevOps
+      DevOpsUrl: 'https://dev.azure.com/<<YOUR-ORG>>'
+      # Here update <<YOUR-PROJECT>> with your project name in Azure DevOps
+      AzureProjectName: '<<YOUR-PROJECT>>'
       PAT: '$(System.AccessToken)'
       DotnetExePath: 'dotnet'
       xmlResultFolder: 'SpecFlowCalculator.Specs'
       xmlNamingFormat: 'test-result'
+      # Here update the test plan ID with your Azure DevOps test plan
       testPlan: '41'
-      testSuite: '44'
+      # Here update the test suite Ids (Comma separated) with in above test plan 
+      testSuite: '44,45'
+      # This is the configuration ID with test plans
       testConfiguration: '6'
       AreTheseDotnetTests: 'true'
   
