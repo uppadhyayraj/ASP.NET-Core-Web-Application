@@ -43,3 +43,5 @@ steps:
       testPlan: '41'
       testSuite: '44'
       testConfiguration: '2'
+      AreTheseDotnetTests: 'true'
+  
