@@ -20,6 +20,7 @@ This project was built using .NET8 SDK version ```8.0.1```
 
 ## Getting Started
 
+- Get the [Azure DevOps Testing Extension](https://marketplace.visualstudio.com/items?itemName=RajUppadhyay.ado-testingextension) into your Azure DevOps Organization
 - Clone this repo into your local machine using your favorite IDE e.g. VS Code
 - Check this code into your Azure Repo or Github repo
 - Navigate to your Azure DevOps instance and [Create a Test Plan](https://learn.microsoft.com/en-us/azure/devops/test/create-a-test-plan?view=azure-devops#create-a-test-plan) and note the ID of this
