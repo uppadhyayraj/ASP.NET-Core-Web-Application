@@ -28,4 +28,3 @@ This project was built using .NET8 SDK version ```8.0.1```
 - Open the file [azure-pipelines.yml](./azure-pipelines.yml), as as commented in the YML file update the values/placeholder.
 - [Create a pipeline](https://learn.microsoft.com/en-us/power-apps/maker/canvas-apps/test-studio-yaml-pipeline#create-a-pipeline) using above YML file and run it
 - You will notice, test will populate automatically in above create test plan/test suites and also results being updated as well.
-ß
