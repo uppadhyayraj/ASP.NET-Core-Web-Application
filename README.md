@@ -1,4 +1,4 @@
-# Testing an ASP.NET Core web application using .NET 6
+# Using Azure DevOps Testing Extension to create tests from BDD files and publishing results to DevOps Test Plans
 
 This project is taken from specflow's repo to demostrate functionality of [Azure DevOps Testing Extension](https://marketplace.visualstudio.com/items?itemName=RajUppadhyay.ado-testingextension)
 
